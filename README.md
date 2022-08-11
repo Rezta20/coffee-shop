@@ -1,1 +1,1 @@
-# Hi the Coffee Shop is open
+# Hi, the Coffee Shop is open
