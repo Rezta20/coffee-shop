@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  Test Deploy on github
+  Test Deploy on github another test
 </template>
 
 <script>
@@ -8,9 +8,7 @@
 
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: {},
 };
 </script>
 
