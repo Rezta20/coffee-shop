@@ -1,0 +1,26 @@
+// Google font url 
+@import url('https://fonts.googleapis.com/css2?family=Nova+Flat&family=Oleo+Script+Swash+Caps&display=swap');
+
+// font variables 
+$base-font-size: 1.5rem;
+
+$oleo :'Oleo Script Swash Caps', cursive;
+$nova-flat:'Nova Flat', cursive;
+
+body{
+   font-family: $nova-flat
+}
+
+.logo-title{
+    font-size: $base-font-size;
+    font-family: $oleo;
+    color: $brown;
+    padding: 10px 5px;
+}
+
+.item-name{
+    font-size:0.5rem;
+    font-weight:bold;
+    color:$black;
+
+}
