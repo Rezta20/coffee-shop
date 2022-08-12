@@ -7,7 +7,11 @@
       </div>
     </section>
 
-    <OrderList />
+    <section class="right-wrapper">
+      <h3 class="logo-title">Order List</h3>
+      <OrderList />
+    </section>
+
     <Dialogue />
   </div>
 </template>
@@ -20,9 +24,9 @@ import Dialogue from './components/Dialogue.vue';
 export default {
   name: 'App',
   components: {
-    OrderList,
     BeverageCard,
     Dialogue,
+    OrderList,
   },
   data() {
     return {
@@ -51,6 +55,162 @@ export default {
           ice: ['Cold'],
           size: ['M', 'L'],
         },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '拿鐵',
+          price: '95',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '摩卡冰沙',
+          price: '110',
+          ice: ['Cold'],
+          size: ['M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '拿鐵',
+          price: '95',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '摩卡冰沙',
+          price: '110',
+          ice: ['Cold'],
+          size: ['M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '拿鐵',
+          price: '95',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '摩卡冰沙',
+          price: '110',
+          ice: ['Cold'],
+          size: ['M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '曼特寧',
+          price: '65',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
+        {
+          name: '美式',
+          price: '55',
+          ice: ['Cold', 'Hot'],
+          size: ['S', 'M', 'L'],
+        },
       ],
     };
   },
@@ -66,14 +226,30 @@ export default {
   // 記得拿掉
   height: 100vh;
   width: 100%;
+  display: flex;
 
   .left-wrapper {
-    margin: 20px 30px;
-    width: 70%;
+    width: calc(100% - 400px);
+    height: 100%;
+  }
+
+  .right-wrapper {
+    width: 400px;
+    height: 100%;
+    background-color: rgba(224, 216, 176, 0.5);
+    position: fixed;
+    right: 0;
+    top: 0;
   }
 }
 
 .beverage-cards {
   width: 100%;
+  height: 850px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow-y: scroll;
+  position: relative;
 }
 </style>

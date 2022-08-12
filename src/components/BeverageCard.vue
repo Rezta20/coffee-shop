@@ -47,7 +47,7 @@ export default {
   margin-bottom: 20px;
 
   .image {
-    width: 90px;
+    width: 80px;
     height: 70px;
     background-color: $brown;
     border-radius: 10px;
