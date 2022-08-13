@@ -44,7 +44,7 @@ export default {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 0 20px 20px;
 
   .image {
     width: 80px;

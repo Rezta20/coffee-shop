@@ -223,8 +223,7 @@ export default {
 .main-background {
   background-color: $main-background;
   position: fixed;
-  // 記得拿掉
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
 
