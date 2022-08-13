@@ -12,7 +12,7 @@
       <OrderList />
     </section>
 
-    <Dialogue />
+    <Dialogue v-show="false" />
   </div>
 </template>
 
