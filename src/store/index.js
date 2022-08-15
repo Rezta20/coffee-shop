@@ -804,10 +804,15 @@ export default createStore({
     ],
 
     orderList: [],
+    historyOrderList: [],
   },
   mutations: {
     orderDrink(state, payload) {
       state.orderList.unshift(payload);
+    },
+    buildOrder(state, payload) {
+      state.historyOrderList.unshift(payload);
+      state.orderList = [];
     },
   },
   actions: {},

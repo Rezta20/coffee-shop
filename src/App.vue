@@ -9,6 +9,8 @@
     </section>
 
     <section class="right-wrapper">
+      <div class="history-order"></div>
+      <div class="history-number">{{historyOrderList.length}}</div>
       <h3 class="logo-title">Order List</h3>
       <OrderList />
     </section>
@@ -37,7 +39,7 @@ export default {
     OrderList,
   },
   computed: {
-    ...mapState(['menuList']),
+    ...mapState(['menuList', 'historyOrderList']),
   },
   data() {
     return {
@@ -93,4 +95,23 @@ export default {
   overflow-y: scroll;
   position: relative;
 }
+
+.history-order{
+  position:absolute;
+  right:0;
+  top:0;
+
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-top: 35px solid $orange;
+}
+
+ .history-number{
+    position:absolute;
+    top:3px;
+    right:30px;
+    color:$white;
+  }
 </style>

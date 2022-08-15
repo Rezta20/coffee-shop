@@ -111,9 +111,10 @@ export default {
       order.ice = this.chosenIce;
       order.size = this.chosenSize;
       order.note = this.note;
-      order.uuid = new Date();
+      order.uuid = +new Date();
       this.$emit('order', order);
       this.initialOptions();
+      this.resetCoffee();
     },
 
   },

@@ -15,11 +15,11 @@
         </div>
       </div>
       <div class="lower">
-        <!-- <div class="type-wrapper">
-          <div v-for="ice in coffee.ice" :key="ice" class="type">
+        <div class="type-wrapper">
+          <div v-for="ice in currentCoffeeIce(coffee)" :key="ice" class="type">
             {{ ice }}
           </div>
-        </div> -->
+        </div>
         <div class="size-wrapper">
           <div v-for="size in currentCoffeeSize(coffee)" :key="size" class="size">
             {{ size }}
@@ -53,6 +53,13 @@ export default {
         const set = this.currentCoffeeSet(currentCoffee);
         const multiSizes = set.map((x) => x.size);
         return [...new Set(multiSizes)];
+      };
+    },
+    currentCoffeeIce() {
+      return (currentCoffee) => {
+        const set = this.currentCoffeeSet(currentCoffee);
+        const multiIces = set.map((x) => x.ice);
+        return [...new Set(multiIces)];
       };
     },
     currentCoffeePrice() {
