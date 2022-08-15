@@ -17,6 +17,7 @@
       v-if="coffeeName"
       :name="coffeeName"
       @resetCoffee="resetCoffeeName"
+      @order="assignOrder"
     />
   </div>
 </template>
@@ -50,6 +51,9 @@ export default {
     },
     resetCoffeeName() {
       this.coffeeName = '';
+    },
+    assignOrder(value) {
+      this.$store.commit('orderDrink', value);
     },
   },
 };

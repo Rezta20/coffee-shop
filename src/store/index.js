@@ -802,8 +802,14 @@ export default createStore({
         },
       ],
     ],
+
+    orderList: [],
   },
-  mutations: {},
+  mutations: {
+    orderDrink(state, payload) {
+      state.orderList.unshift(payload);
+    },
+  },
   actions: {},
   modules: {},
 });

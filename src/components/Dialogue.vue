@@ -29,11 +29,11 @@
             type="text"
             class="note"
             placeholder="少糖，去冰之類的"
-            v-model="notes"
+            v-model="note"
           />
         </div>
       </div>
-      <button class="btn-order">點飲料</button>
+      <button @click ="orderDrink" class="btn-order">點飲料</button>
     </div>
   </div>
 </template>
@@ -50,12 +50,11 @@ export default {
     return {
       chosenIce: '',
       chosenSize: '',
-      notes: '',
+      note: '',
     };
   },
   created() {
-    [this.chosenIce] = this.currentCoffeeIce;
-    [this.chosenSize] = this.currentCoffeeSize;
+    this.initialOptions();
   },
   computed: {
     currentCoffeeSize() {
@@ -82,7 +81,6 @@ export default {
 
   methods: {
     resetCoffee() {
-      console.log('hey');
       this.$emit('resetCoffee', '');
     },
     currentCoffeeSet(currentCoffee) {
@@ -100,6 +98,22 @@ export default {
     },
     changeIce(ice) {
       this.chosenIce = ice;
+    },
+    initialOptions() {
+      [this.chosenIce] = this.currentCoffeeIce;
+      [this.chosenSize] = this.currentCoffeeSize;
+      this.note = '';
+    },
+    orderDrink() {
+      const order = {};
+      order.name = this.name;
+      order.price = this.currentCoffeePrice;
+      order.ice = this.chosenIce;
+      order.size = this.chosenSize;
+      order.note = this.note;
+      order.uuid = new Date();
+      this.$emit('order', order);
+      this.initialOptions();
     },
 
   },

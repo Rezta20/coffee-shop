@@ -1,6 +1,5 @@
 <template>
-<div>
-
+<div class="root-wrapper">
   <div
     v-for="coffee in allCoffeeName"
     :key="coffee"
@@ -100,6 +99,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/index';
+
+.root-wrapper{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  align-items: center;
+}
 
 .wrapper {
   box-sizing: border-box;
