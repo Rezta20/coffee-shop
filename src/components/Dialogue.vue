@@ -10,17 +10,19 @@
 
         <div class="options">
           <div class="ice-wrapper">
-            <div @click="changeIce(ice)" v-for="ice in currentCoffeeIce" :key ='ice'
+            <button @click="changeIce(ice)" v-for="ice in currentCoffeeIce" :key ='ice'
             :class="{'ice-chosen':ice=== chosenIce}"  class="ice">
               {{ ice }}
-            </div>
+            </button>
           </div>
 
           <div class="size-wrapper">
-            <div @click="changeSize(size)" v-for="size in currentCoffeeSize" :key='size'
-            :class="{'size-chosen':size=== chosenSize}" class="size">
+            <button @click="changeSize(size)" v-for="size in sizes" :key='size'
+            :disabled="disabledSize(size)"
+            :class="[{ 'size-chosen': size === chosenSize },
+                      { 'size-disabled': disabledSize(size) }]" class="size">
               {{ size }}
-            </div>
+            </button>
           </div>
         </div>
         <div class="note-wrapper">
@@ -48,6 +50,7 @@ export default {
   },
   data() {
     return {
+      sizes: ['S', 'M', 'L'],
       chosenIce: '',
       chosenSize: '',
       note: '',
@@ -74,7 +77,24 @@ export default {
       function current(coffee) {
         return (coffee.size === that.chosenSize) && (coffee.ice === that.chosenIce);
       }
-      return set.find(current).price;
+      return set.find(current)?.price;
+    },
+    structuredDisableSize() {
+      const allSize = ['S', 'M', 'L'];
+      return allSize.map((x) => {
+        const obj = {};
+        obj.key = x;
+        obj.isDisabled = !this.currentCoffeeSize.includes(x);
+        return obj;
+      });
+    },
+    disabledSize() {
+      return (currentSize) => {
+        function isDisabled(size) {
+          return size.key === currentSize;
+        }
+        return this.structuredDisableSize.find(isDisabled).isDisabled;
+      };
     },
     ...mapState(['menuList']),
   },
@@ -165,7 +185,7 @@ export default {
         justify-content: space-between;
         width: 100%;
         margin-top: 20px;
-        font-size: 24px;
+        font-size: 22px;
         font-family: $oleo;
       }
 
@@ -193,12 +213,13 @@ export default {
         }
         .ice {
           color: $brown;
+          border:none;
           background-color: rgba(206, 148, 97, 0.2);
           &:hover {
             color: $orange;
             background-color: rgba(222, 160, 87, 0.2);
             cursor: pointer;
-            box-shadow: $pressed-box-shadow;
+
           }
         }
 
@@ -215,20 +236,30 @@ export default {
           width: 160px;
           .size {
             color: $light-brown;
-            border: solid 1px $light-brown;
+            background-color:transparent;
+            border: solid 2px $light-brown;
             &:hover {
               color: $orange;
-              border: solid 1px $orange;
+              border: solid 2px $orange;
               cursor: pointer;
-              box-shadow: $pressed-box-shadow;
             }
           }
 
           .size-chosen{
               color: $orange;
-              border: solid 1px $orange;
+              border: solid 2px $orange;
               cursor: pointer;
               box-shadow: $pressed-box-shadow;
+          }
+          .size-disabled{
+              color:#e5dfdf;
+              border: solid 2px #e5dfdf;;
+              &:hover{
+                color:#e5dfdf;
+                border: solid 2px #e5dfdf;;
+                cursor:not-allowed;
+              }
+
           }
         }
       }
