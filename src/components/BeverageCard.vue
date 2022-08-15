@@ -1,21 +1,27 @@
 <template>
-  <div v-for="coffee in coffees" :key="coffee.name" class="wrapper">
+  <div
+    v-for="coffee in allCoffeeName"
+    :key="coffee"
+    class="wrapper"
+    @click="selectedCoffee(coffee)"
+  >
+    <!-- <div>{{ allCoffeeSize }}</div> -->
     <div class="image"></div>
     <div class="detail">
       <div class="upper">
-        <h3 class="name">{{ coffee.name }}</h3>
+        <h3 class="name">{{ coffee }}</h3>
         <div class="price">
-          <span>$</span>{{ coffee.price }} <span class="up-to">起</span>
+          <span>$</span>price <span class="up-to">起</span>
         </div>
       </div>
       <div class="lower">
-        <div class="type-wrapper">
+        <!-- <div class="type-wrapper">
           <div v-for="ice in coffee.ice" :key="ice" class="type">
             {{ ice }}
           </div>
-        </div>
+        </div> -->
         <div class="size-wrapper">
-          <div v-for="size in coffee.size" :key="size" class="size">
+          <div v-for="size in currentCoffeeSize(coffee)" :key="size" class="size">
             {{ size }}
           </div>
         </div>
@@ -25,14 +31,60 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'BeverageCard',
   components: {},
-  props: ['coffees'],
+  props: [],
+  computed: {
+    allCoffeeName() {
+      const eachName = [
+        ...new Set(
+          this.menuList.flatMap((eachCoffee) =>
+            eachCoffee.map((coffee) => coffee.name)
+          )
+        ),
+      ];
+      return eachName;
+    },
+  currentCoffeeSize() {
+      return (currentCoffee) => {
+        this.menuList.flatMap((eachCoffee) => {
+          let currentCoffeeSet;
+          let count = 0;
+          if (eachCoffee[0].name === currentCoffee) {
+            count++;
+            console.log(eachCoffee[0])
+              currentCoffeeSet = eachCoffee
+          }
+            console.log(count)
+          console.log(currentCoffeeSet)
+
+
+
+       //   const filterNullSizes = [...new Set(multiSizes)].filter((size) => size !== null)
+
+        //   if (filterNullSizes.length) {
+        // return  filterNullSizes
+        //   }
+
+
+        });
+      };
+    },
+    ...mapState(['menuList']),
+  },
+  methods: {
+    selectedCoffee(coffee) {
+      console.log(coffee);
+      this.$emit('selectedCoffee', coffee);
+    },
+  },
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import '@/assets/scss/index';
 
 .wrapper {
@@ -40,7 +92,7 @@ export default {
   border-radius: 10px;
   background-color: $white;
   width: 300px;
-  height: 90px;
+  height: 110px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -54,7 +106,7 @@ export default {
   }
 
   .detail {
-    width: 50%;
+    width: 60%;
     .upper,
     .lower {
       display: flex;
@@ -63,9 +115,18 @@ export default {
     }
 
     .price {
+      width: 65px;
       padding-left: 5px;
+      text-align: right;
       .up-to {
         font-size: 14px;
+      }
+    }
+
+    .upper {
+      .name {
+        font-size: 16px;
+        font-weight: 500;
       }
     }
 
@@ -80,7 +141,7 @@ export default {
       }
 
       .type-wrapper {
-        width: 50%;
+        width: 45%;
       }
 
       .size-wrapper {

@@ -1,27 +1,34 @@
 <template>
-  <div class="cover">
+  <div class="cover" @click.self="resetCoffee">
     <div class="dialogue-background">
       <div class="wrapper">
         <div class="image"></div>
         <div class="item">
-          <div class="name">曼特寧</div>
-          <div class="price">$65</div>
+          <div class="name">{{ currentCoffee.name }}</div>
+          <div class="price">$ {{ currentCoffee.price[0] }}</div>
         </div>
 
         <div class="options">
           <div class="ice-wrapper">
-            <div class="cold">C</div>
-            <div class="hot">H</div>
+            <div v-for="ice in currentCoffee.ice" :key="ice" class="ice">
+              {{ ice }}
+            </div>
           </div>
+
           <div class="size-wrapper">
-            <div class="small">S</div>
-            <div class="medium">M</div>
-            <div class="large">L</div>
+            <div v-for="size in currentCoffee.size" :key="size" class="size">
+              {{ size }}
+            </div>
           </div>
         </div>
         <div class="note-wrapper">
           <div class="name">備註</div>
-          <textarea type="text" class="note" placeholder="少糖，去冰之類的" />
+          <textarea
+            type="text"
+            class="note"
+            placeholder="少糖，去冰之類的"
+            v-model="notes"
+          />
         </div>
       </div>
       <button class="btn-order">點飲料</button>
@@ -32,7 +39,18 @@
 <script>
 export default {
   name: 'Dialogue',
-  components: {},
+  props: ['currentCoffee'],
+  data() {
+    return {
+      notes: '',
+    };
+  },
+  methods: {
+    resetCoffee() {
+      console.log('hey');
+      this.$emit('resetCoffee', {});
+    },
+  },
 };
 </script>
 
@@ -93,46 +111,43 @@ export default {
         .ice-wrapper,
         .size-wrapper {
           display: flex;
-          div {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-          }
+          justify-content: space-between;
+          align-items: center;
         }
 
-        .ice-wrapper {
-          width: calc(100% - 220px);
-          justify-content: space-between;
-
-          div {
-            color: $brown;
-            background-color: rgba(206, 148, 97, 0.2);
-          }
-
-          div:hover {
+        .ice,
+        .size {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        .ice {
+          color: $brown;
+          background-color: rgba(206, 148, 97, 0.2);
+          &:hover {
             color: $orange;
             background-color: rgba(222, 160, 87, 0.2);
             cursor: pointer;
             box-shadow: $pressed-box-shadow;
           }
         }
+        .ice-wrapper {
+          width: 30%;
+        }
         .size-wrapper {
-          justify-content: space-between;
           width: 160px;
-
-          div {
+          .size {
             color: $light-brown;
             border: solid 1px $light-brown;
-          }
-
-          div:hover {
-            color: $orange;
-            border: solid 1px $orange;
-            cursor: pointer;
-            box-shadow: $pressed-box-shadow;
+            &:hover {
+              color: $orange;
+              border: solid 1px $orange;
+              cursor: pointer;
+              box-shadow: $pressed-box-shadow;
+            }
           }
         }
       }

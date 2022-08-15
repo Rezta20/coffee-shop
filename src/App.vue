@@ -3,7 +3,8 @@
     <section class="left-wrapper">
       <h3 class="logo-title">Coffee Shop</h3>
       <div class="beverage-cards">
-        <BeverageCard :coffees="coffees" />
+        {{ currentCoffee }}
+        <BeverageCard @selectedCoffee="selectedCoffee" />
       </div>
     </section>
 
@@ -12,7 +13,11 @@
       <OrderList />
     </section>
 
-    <Dialogue v-show="false" />
+    <Dialogue
+      v-if="Object.keys(currentCoffee).length !== 0"
+      :currentCoffee="currentCoffee"
+      @resetCoffee="resetCurrentCoffee"
+    />
   </div>
 </template>
 
@@ -30,189 +35,18 @@ export default {
   },
   data() {
     return {
-      coffees: [
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '拿鐵',
-          price: '95',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '摩卡冰沙',
-          price: '110',
-          ice: ['Cold'],
-          size: ['M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '拿鐵',
-          price: '95',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '摩卡冰沙',
-          price: '110',
-          ice: ['Cold'],
-          size: ['M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '拿鐵',
-          price: '95',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '摩卡冰沙',
-          price: '110',
-          ice: ['Cold'],
-          size: ['M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '拿鐵',
-          price: '95',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '摩卡冰沙',
-          price: '110',
-          ice: ['Cold'],
-          size: ['M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '曼特寧',
-          price: '65',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-        {
-          name: '美式',
-          price: '55',
-          ice: ['Cold', 'Hot'],
-          size: ['S', 'M', 'L'],
-        },
-      ],
+      currentCoffee: {},
     };
+  },
+
+  methods: {
+    selectedCoffee(coffee) {
+      console.log(coffee);
+      this.currentCoffee = coffee;
+    },
+    resetCurrentCoffee() {
+      this.currentCoffee = {};
+    },
   },
 };
 </script>

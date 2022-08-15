@@ -5,3 +5,10 @@ end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 100
+quote_type = single 
+trailing_comma = all
+
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
