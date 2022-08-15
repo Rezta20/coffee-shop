@@ -85,7 +85,6 @@ export default {
     ...mapState(['menuList']),
   },
   methods: {
-
     selectedCoffee(coffee) {
       this.$emit('selectedCoffee', coffee);
     },
@@ -187,5 +186,11 @@ export default {
     // display: none;
     color: black;
   }
+
 }
+
+  @media(max-width:1024px){
+      .wrapper{
+    width: 265px;
+  }}
 </style>
