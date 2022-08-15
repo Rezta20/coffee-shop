@@ -1,6 +1,6 @@
 #### [DEMO Link](https://rezta20.github.io/coffee-shop/)
 ----
-### Feature Plan
+#### Feature Plan
 - 編輯飲料
 - 刪除飲料
 - 導入圖片
@@ -8,6 +8,7 @@
 - 右上角歷史訂單 可以點擊打開顯示
 - 菜單分組 菜單切換
 - 傳連結 可以共同編輯點餐
+
 
 # coffee-shop
 
