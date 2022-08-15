@@ -3,7 +3,7 @@
     <section class="left-wrapper">
       <h3 class="logo-title">Coffee Shop</h3>
       <div class="beverage-cards">
-        {{ currentCoffee }}
+        {{ coffeeName }}
         <BeverageCard @selectedCoffee="selectedCoffee" />
       </div>
     </section>
@@ -14,14 +14,16 @@
     </section>
 
     <Dialogue
-      v-if="Object.keys(currentCoffee).length !== 0"
-      :currentCoffee="currentCoffee"
-      @resetCoffee="resetCurrentCoffee"
+      v-if="coffeeName"
+      :name="coffeeName"
+      @resetCoffee="resetCoffeeName"
     />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import OrderList from '@/components/OrderList.vue';
 import BeverageCard from '@/components/BeverageCard.vue';
 import Dialogue from './components/Dialogue.vue';
@@ -33,19 +35,21 @@ export default {
     Dialogue,
     OrderList,
   },
+  computed: {
+    ...mapState(['menuList']),
+  },
   data() {
     return {
-      currentCoffee: {},
+      coffeeName: '',
     };
   },
 
   methods: {
     selectedCoffee(coffee) {
-      console.log(coffee);
-      this.currentCoffee = coffee;
+      this.coffeeName = coffee;
     },
-    resetCurrentCoffee() {
-      this.currentCoffee = {};
+    resetCoffeeName() {
+      this.coffeeName = '';
     },
   },
 };

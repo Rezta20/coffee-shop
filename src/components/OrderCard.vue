@@ -1,4 +1,5 @@
 <template>
+<div>
   <div v-for="(coffee, index) in selected" :key="index" class="wrapper">
     <div class="actions">
       <div class="edit">E</div>
@@ -20,6 +21,8 @@
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 <script>

@@ -4,19 +4,21 @@
       <div class="wrapper">
         <div class="image"></div>
         <div class="item">
-          <div class="name">{{ currentCoffee.name }}</div>
-          <div class="price">$ {{ currentCoffee.price[0] }}</div>
+          <div class="name">{{ name }}</div>
+          <div class="price">$ {{  currentCoffeePrice }}</div>
         </div>
 
         <div class="options">
           <div class="ice-wrapper">
-            <div v-for="ice in currentCoffee.ice" :key="ice" class="ice">
+            <div @click="changeIce(ice)" v-for="ice in currentCoffeeIce" :key ='ice'
+            :class="{'ice-chosen':ice=== chosenIce}"  class="ice">
               {{ ice }}
             </div>
           </div>
 
           <div class="size-wrapper">
-            <div v-for="size in currentCoffee.size" :key="size" class="size">
+            <div @click="changeSize(size)" v-for="size in currentCoffeeSize" :key='size'
+            :class="{'size-chosen':size=== chosenSize}" class="size">
               {{ size }}
             </div>
           </div>
@@ -37,19 +39,69 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Dialogue',
-  props: ['currentCoffee'],
+  props: {
+    name: String,
+  },
   data() {
     return {
+      chosenIce: '',
+      chosenSize: '',
       notes: '',
     };
   },
+  created() {
+    [this.chosenIce] = this.currentCoffeeIce;
+    [this.chosenSize] = this.currentCoffeeSize;
+  },
+  computed: {
+    currentCoffeeSize() {
+      const set = this.currentCoffeeSet(this.name);
+      const multiSizes = set.map((x) => x.size);
+      return [...new Set(multiSizes)];
+    },
+    currentCoffeeIce() {
+      const set = this.currentCoffeeSet(this.name);
+      const multiIces = set.map((x) => x.ice);
+      return [...new Set(multiIces)];
+    },
+    currentCoffeePrice() {
+      const set = this.currentCoffeeSet(this.name);
+      const that = this;
+
+      function current(coffee) {
+        return (coffee.size === that.chosenSize) && (coffee.ice === that.chosenIce);
+      }
+      return set.find(current).price;
+    },
+    ...mapState(['menuList']),
+  },
+
   methods: {
     resetCoffee() {
       console.log('hey');
-      this.$emit('resetCoffee', {});
+      this.$emit('resetCoffee', '');
     },
+    currentCoffeeSet(currentCoffee) {
+      let currentCoffeeSet;
+      this.menuList.flatMap((eachCoffee) => {
+        if (eachCoffee[0].name !== currentCoffee) {
+          return;
+        }
+        currentCoffeeSet = eachCoffee;
+      });
+      return currentCoffeeSet;
+    },
+    changeSize(size) {
+      this.chosenSize = size;
+    },
+    changeIce(ice) {
+      this.chosenIce = ice;
+    },
+
   },
 };
 </script>
@@ -134,6 +186,13 @@ export default {
             box-shadow: $pressed-box-shadow;
           }
         }
+
+        .ice-chosen {
+            color: $orange;
+            background-color: rgba(222, 160, 87, 0.2);
+            cursor: pointer;
+            box-shadow: $pressed-box-shadow;
+          }
         .ice-wrapper {
           width: 30%;
         }
@@ -148,6 +207,13 @@ export default {
               cursor: pointer;
               box-shadow: $pressed-box-shadow;
             }
+          }
+
+          .size-chosen{
+              color: $orange;
+              border: solid 1px $orange;
+              cursor: pointer;
+              box-shadow: $pressed-box-shadow;
           }
         }
       }

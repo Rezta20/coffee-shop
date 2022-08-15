@@ -1,17 +1,18 @@
 <template>
+<div>
+
   <div
     v-for="coffee in allCoffeeName"
     :key="coffee"
     class="wrapper"
     @click="selectedCoffee(coffee)"
   >
-    <!-- <div>{{ allCoffeeSize }}</div> -->
     <div class="image"></div>
     <div class="detail">
       <div class="upper">
         <h3 class="name">{{ coffee }}</h3>
         <div class="price">
-          <span>$</span>price <span class="up-to">起</span>
+          <span>$</span>{{coffeeBasePrice(coffee)}} <span class="up-to">起</span>
         </div>
       </div>
       <div class="lower">
@@ -28,6 +29,8 @@
       </div>
     </div>
   </div>
+
+  </div>
 </template>
 
 <script>
@@ -41,44 +44,55 @@ export default {
     allCoffeeName() {
       const eachName = [
         ...new Set(
-          this.menuList.flatMap((eachCoffee) =>
-            eachCoffee.map((coffee) => coffee.name)
-          )
+          this.menuList.flatMap((eachCoffee) => eachCoffee.map((coffee) => coffee.name)),
         ),
       ];
       return eachName;
     },
-  currentCoffeeSize() {
+    currentCoffeeSize() {
       return (currentCoffee) => {
-        this.menuList.flatMap((eachCoffee) => {
-          let currentCoffeeSet;
-          let count = 0;
-          if (eachCoffee[0].name === currentCoffee) {
-            count++;
-            console.log(eachCoffee[0])
-              currentCoffeeSet = eachCoffee
+        const set = this.currentCoffeeSet(currentCoffee);
+        const multiSizes = set.map((x) => x.size);
+        return [...new Set(multiSizes)];
+      };
+    },
+    currentCoffeePrice() {
+      return (currentCoffee) => {
+        const set = this.currentCoffeeSet(currentCoffee);
+        const multiPrices = set.map((x) => x.price);
+        return [...new Set(multiPrices)];
+      };
+    },
+    coffeeBasePrice() {
+      return (currentCoffee) => {
+        const price = this.currentCoffeePrice(currentCoffee);
+        let min = Infinity;
+
+        price.forEach((x) => {
+          if (min > x) {
+            min = x;
           }
-            console.log(count)
-          console.log(currentCoffeeSet)
-
-
-
-       //   const filterNullSizes = [...new Set(multiSizes)].filter((size) => size !== null)
-
-        //   if (filterNullSizes.length) {
-        // return  filterNullSizes
-        //   }
-
-
         });
+        return min;
       };
     },
     ...mapState(['menuList']),
   },
   methods: {
+
     selectedCoffee(coffee) {
-      console.log(coffee);
       this.$emit('selectedCoffee', coffee);
+    },
+
+    currentCoffeeSet(currentCoffee) {
+      let currentCoffeeSet;
+      this.menuList.flatMap((eachCoffee) => {
+        if (eachCoffee[0].name !== currentCoffee) {
+          return;
+        }
+        currentCoffeeSet = eachCoffee;
+      });
+      return currentCoffeeSet;
     },
   },
 };
